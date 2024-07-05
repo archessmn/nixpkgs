@@ -21914,6 +21914,8 @@ with pkgs;
 
   libfprint = callPackage ../development/libraries/libfprint { };
 
+  libfprint-elanmoc2 = callPackage ../development/libraries/libfprint-elanmoc2 { };
+
   libfprint-tod = callPackage ../development/libraries/libfprint-tod { };
 
   libfprint-2-tod1-goodix = callPackage ../development/libraries/libfprint-2-tod1-goodix { };
