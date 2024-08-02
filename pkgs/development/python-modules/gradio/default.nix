@@ -4,7 +4,6 @@
   buildPythonPackage,
   fetchPypi,
   pythonOlder,
-  pythonRelaxDepsHook,
   writeShellScriptBin,
   gradio,
 
@@ -91,7 +90,6 @@ buildPythonPackage rec {
   ];
 
   nativeBuildInputs = [
-    pythonRelaxDepsHook
     hatchling
     hatch-requirements-txt
     hatch-fancy-pypi-readme
@@ -125,7 +123,7 @@ buildPythonPackage rec {
     uvicorn
     typer
     tomlkit
-  ] ++ typer.passthru.optional-dependencies.all;
+  ];
 
   passthru.optional-dependencies.oauth = [
     authlib

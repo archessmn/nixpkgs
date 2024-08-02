@@ -12,7 +12,6 @@
   qtdeclarative,
   wrapQtAppsHook,
   darwin,
-  buildPackages,
 }:
 
 let
@@ -37,7 +36,7 @@ buildPythonPackage (
     src = fetchPypi {
       pname = "PyQtWebEngine";
       inherit version;
-      sha256 = "sha256-riQe8qYceCk5xYtSwq6lOtmbMPOTTINY1eCm67P9ByE=";
+      hash = "sha256-riQe8qYceCk5xYtSwq6lOtmbMPOTTINY1eCm67P9ByE=";
     };
 
     postPatch = ''

@@ -3,12 +3,11 @@
   buildGoModule,
   fetchFromGitHub,
   stdenv,
-  darwin,
   copyDesktopItems,
   makeDesktopItem,
 
   xorg,
-  libGL,
+  glfw,
   gtk3,
   pkg-config,
   wrapGAppsHook3,
@@ -16,36 +15,32 @@
 
 buildGoModule rec {
   pname = "picocrypt";
-  version = "1.35";
+  version = "1.37";
 
   src = fetchFromGitHub {
     owner = "Picocrypt";
     repo = "Picocrypt";
     rev = version;
-    hash = "sha256-0dzJtwJ588c0ldf97u/J2zHkxWr176p6/FLCzMXgjQ0=";
+    hash = "sha256-K1zaDHTI9NH2Xn2N1aiE2+wZrfVQBvqIyLTBCZs3Am8=";
   };
 
   sourceRoot = "${src.name}/src";
 
-  vendorHash = "sha256-W982HiosXvDadMJJ0wP6AsalQ/uxklSbbmFp26XQEhM=";
+  vendorHash = "sha256-lc34GeO8y5XGRk0x6ghw/m/Ew7TDn6MOk4fc2u9UofQ=";
 
   ldflags = [
     "-s"
     "-w"
   ];
 
-  buildInputs = [
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXrandr
-    xorg.libXi
-    xorg.libXinerama
-    xorg.libXxf86vm
-    libGL.dev
-    gtk3
-  ] ++ lib.optionals stdenv.isDarwin [
-    darwin.apple_sdk.frameworks.Kernel
-  ];
+  buildInputs =
+    # Depends on a vendored, patched GLFW.
+    glfw.buildInputs or [ ]
+    ++ glfw.propagatedBuildInputs or [ ]
+    ++ lib.optionals (!stdenv.isDarwin) [
+      gtk3
+      xorg.libXxf86vm
+    ];
 
   nativeBuildInputs = [
     copyDesktopItems

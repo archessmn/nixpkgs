@@ -13,12 +13,9 @@
   markdown-it-py,
   mdurl,
   pygments,
-  pytest,
   pytestCheckHook,
   pythonOlder,
-  pythonRelaxDepsHook,
   pyyaml,
-  reptor,
   requests,
   rich,
   setuptools,
@@ -49,7 +46,6 @@ buildPythonPackage rec {
 
   build-system = [ setuptools ];
 
-  nativeBuildInputs = [ pythonRelaxDepsHook ];
 
   dependencies = [
     asgiref
